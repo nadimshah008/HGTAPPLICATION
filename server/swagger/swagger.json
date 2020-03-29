@@ -1,0 +1,136 @@
+{
+    "swagger": "2.0",
+    "title": "True Needs Api Swagger",
+    "description": "Swagger Api Tool for True Needs api",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0",
+    "basePath": "/api",
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/user": {
+        "post": {
+          "tags": [
+            "User Module"
+          ],
+          "summary": "Add User",
+          "description": "POST - This api is used to Add user.",
+          "parameters": [{
+            "name": "body",
+            "in": "body",
+            "description": "Body should contain name, email, and phone",
+            "required": "true",
+            "schema": {
+              "$ref": "#definitions/addUser"
+            }
+          }],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#definitions/appResponse"
+              }
+            },
+            "default": {
+              "description": "Error",
+              "schema": {
+                "$ref": "#definitions/errorResponse"
+              }
+            }
+          }
+        }
+      },
+      "/users": {
+      
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Finds Users",
+                "description": "Find Users",
+                "operationId": "Find User",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/getUser"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        
+      }
+    },
+    "_comment": "Complex objects have schema definitions",
+    "definitions": {
+      "appResponse": {
+        "required": "message",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "type": "number"
+          }
+        }
+      },
+      "errorResponse": {
+        "required": "message",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "addUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": true
+          },
+          "name": {
+            "type": "string",
+            "required": true
+          },
+          "phone": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "getUser": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "required": true
+          }
+        }
+      }
+    }
+  }
